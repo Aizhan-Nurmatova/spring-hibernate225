@@ -16,9 +16,11 @@ public class MainApp {
       AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
       UserService userService = context.getBean(UserService.class);
-//      User user1 = new User("Aizhan" , "Nurmatova" , "nurmatova@gmai.com");
-//      user1.setCar(new Car("BMW" , 2004));
-//      userService.add(user1);
+//      userService.add(new User("Sezim","Satybaldieva","satybaldieva@gmai.com",new Car("Tesla", 2020)));
+//      userService.add(new User("Beksultan","Mamatkayr uulu","beksultan@gmail.com",new Car("Toyota",2018)));
+//      userService.add(new User("Aybek","Zhumaev","aybek@mail.ru",new Car("Honda",2021)));
+//      userService.add(new User("Aizhan","Nurmatova","nurmtova@mail.ru",new Car("Toyota",2021)));
+//      userService.add(new User("Rayim","Tashmamat uulu","million@mail.ru",new Car("Mercedes",2018)));
 //
 //
 //      List<User> users = userService.listUsers();
@@ -28,9 +30,13 @@ public class MainApp {
 //         System.out.println("Last Name = "+user.getLastName());
 //         System.out.println("Email = "+user.getEmail());
 //         System.out.println("Car = "+ user.getCar());
+//         System.out.println("------------------------------------------");
 //      }
 
-       System.out.println(userService.getModel("bmw"));
+
+      System.out.println(userService.getModelCar("Tesla"));
+      System.out.println(userService.getSeries(2021));
+      System.out.println(userService.gerCarOwner("Tesla",2020));
 
       context.close();
    }

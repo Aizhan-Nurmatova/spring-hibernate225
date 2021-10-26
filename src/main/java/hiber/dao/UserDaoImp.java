@@ -1,6 +1,6 @@
 package hiber.dao;
 
-import hiber.model.Car;
+
 import hiber.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,18 +29,40 @@ public class UserDaoImp implements UserDao {
    @Override
    @SuppressWarnings("unchecked")
    public List<User> listUsers() {
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-      return query.getResultList();
+      return sessionFactory.openSession().createQuery("FROM User").getResultList();
    }
 
    @Override
-   public User getModel(String model) {
-      List <User> users = sessionFactory.getCurrentSession().createQuery("from User").getResultList();
+   public User getModelCar(String model) {
+      List <User> users = sessionFactory.openSession().createQuery("from User").getResultList();
       User user = null;
       for (int i = 0; i < users.size(); i++) {
-         if (users.get(i).getCar().getModel() == model){
-            user= users.get(i);
-            break;
+         if (users.get(i).getCar().getModel().equals(model)){
+            user = users.get(i);
+         }
+      }
+      return user;
+   }
+
+   @Override
+   public User getSeries(int series) {
+      List <User> users = sessionFactory.openSession().createQuery("from User").getResultList();
+      User user = null;
+      for (int i = 0; i < users.size(); i++) {
+         if (users.get(i).getCar().getSeries() == series){
+            user = users.get(i);
+         }
+      }
+      return user;
+   }
+
+   @Override
+   public User gerCarOwner(String model, int series) {
+      List<User> users = sessionFactory.openSession().createQuery("from User").getResultList();
+      User user = null;
+      for (int i = 0; i < users.size(); i++){
+         if(users.get(i).getCar().getModel().equals(model) && users.get(i).getCar().getSeries() == series){
+            user = users.get(i);
          }
       }
       return user;
